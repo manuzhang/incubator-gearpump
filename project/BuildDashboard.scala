@@ -97,7 +97,7 @@ object BuildDashboard extends sbt.Build {
     persistLauncher in Compile := false,
     persistLauncher in Test := false,
     skip in packageJSDependencies := false,
-    scoverage.ScoverageSbtPlugin.ScoverageKeys.coverageExcludedPackages :=
+    scoverage.ScoverageKeys.coverageExcludedPackages :=
       ".*gearpump\\.dashboard.*",
 
     copySharedSourceFiles := {

@@ -21,7 +21,7 @@ import Keys._
 
 object Dependencies {
 
-  val crossScalaVersionNumbers = Seq("2.11.8")
+  val crossScalaVersionNumbers = Seq("2.12.5")
   val scalaVersionNumber = crossScalaVersionNumbers.last
   val akkaVersion = "2.4.16"
   val akkaHttpVersion = "10.0.1"
@@ -41,17 +41,17 @@ object Dependencies {
   val slf4jVersion = "1.7.16"
   val guavaVersion = "16.0.1"
   val codahaleVersion = "3.0.2"
-  val kryoVersion = "0.4.1"
+  val kryoVersion = "0.5.1"
   val gsCollectionsVersion = "6.2.0"
   val sprayVersion = "1.3.2"
   val sprayJsonVersion = "1.3.1"
-  val scalaTestVersion = "2.2.0"
-  val scalaCheckVersion = "1.11.3"
+  val scalaTestVersion = "3.0.5"
+  val scalaCheckVersion = "1.14.0"
   val mockitoVersion = "1.10.17"
-  val bijectionVersion = "0.8.0"
+  val bijectionVersion = "0.9.6"
   val scalazVersion = "7.1.1"
-  val algebirdVersion = "0.9.0"
-  val chillVersion = "0.6.0"
+  val algebirdVersion = "0.13.4"
+  val chillVersion = "0.9.0"
   val jedisVersion = "2.9.0"
   val rabbitmqVersion = "3.5.3"
   val calciteVersion = "1.12.0"

@@ -28,7 +28,7 @@ object BuildExamples extends sbt.Build {
   lazy val examples: Seq[ProjectReference] = Seq(
     complexdag,
     distributedshell,
-    distributeservice,
+    // distributeservice,
     examples_kafka,
     examples_state,
     fsio,
