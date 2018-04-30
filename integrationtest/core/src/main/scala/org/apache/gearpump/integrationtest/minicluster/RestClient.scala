@@ -35,7 +35,7 @@ import org.apache.gearpump.integrationtest.{Docker, Util}
 import org.apache.gearpump.services.AppMasterService.Status
 import org.apache.gearpump.services.MasterService.{AppSubmissionResult, BuiltinPartitioners}
 // NOTE: This cannot be removed!!!
-import org.apache.gearpump.services.util.UpickleUtil._
+import org.apache.gearpump.services.util.JsonUtil._
 import org.apache.gearpump.streaming.ProcessorDescription
 import org.apache.gearpump.streaming.appmaster.AppMaster.ExecutorBrief
 import org.apache.gearpump.streaming.appmaster.DagManager.{DAGOperationResult, ReplaceProcessor}
@@ -185,13 +185,13 @@ class RestClient(host: String, port: Int) {
 
   def queryWorkerMetrics(workerId: WorkerId, current: Boolean): HistoryMetrics = {
     val args = if (current) "?readLatest=true" else ""
-    val workerIdStr = WorkerId.render(workerId)
+    val workerIdStr = workerId.toString
     val resp = callApi(s"worker/$workerIdStr/metrics/worker$workerIdStr?$args")
     decodeAs[HistoryMetrics](resp)
   }
 
   def queryWorkerConfig(workerId: WorkerId): Config = {
-    val resp = callApi(s"worker/${WorkerId.render(workerId)}/config")
+    val resp = callApi(s"worker/${workerId}/config")
     ConfigFactory.parseString(resp)
   }
 
