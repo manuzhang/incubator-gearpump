@@ -188,7 +188,7 @@ class Graph[N, E](private val graph: SGraph[N, LDiEdge]) extends Serializable {
    * clone the graph
    */
   def copy: Graph[N, E] = {
-    new Graph[N, E](graph)
+    new Graph[N, E](SGraph.from(graph.nodes, graph.edges))
   }
 
   /**
@@ -233,6 +233,8 @@ class Graph[N, E](private val graph: SGraph[N, LDiEdge]) extends Serializable {
     graph.topologicalSort match {
       case Right(t) =>
         t.map(_.value).toIterator
+      case Left(_) =>
+        topologicalOrderWithCirclesIterator
     }
   }
 
@@ -302,12 +304,8 @@ class Graph[N, E](private val graph: SGraph[N, LDiEdge]) extends Serializable {
    * http://www.drdobbs.com/database/topological-sorting/184410262
    */
   def topologicalOrderWithCirclesIterator: Iterator[N] = {
-    if (hasCycle()) {
-      val topo = getAcyclicCopy().topologicalOrderIterator
-      topo.flatMap(_.sortBy(indices).iterator)
-    } else {
-      topologicalOrderIterator
-    }
+    val topo = getAcyclicCopy().topologicalOrderIterator
+    topo.flatMap(_.sortBy(indices).iterator)
   }
 
   private def getAcyclicCopy(): Graph[mutable.MutableList[N], E] = {
@@ -360,7 +358,7 @@ class Graph[N, E](private val graph: SGraph[N, LDiEdge]) extends Serializable {
     graph.topologicalSort match {
       case Right(t) =>
         t.toLayered.foreach { case (level, nodes) =>
-          nodes.toList.sortBy(indices).foreach { n =>
+          nodes.foreach { n =>
             map += (n.value -> level)
           }
         }
